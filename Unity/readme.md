@@ -16,7 +16,9 @@ Here we put all the scripts who need the dlls in the same folder to work
 Since you are importing dll you need a script that will import them. Here it is "OpenCVInterop.cs"
 In this script we create methods whom declarations will match the one of the function we exported in our C++ code
 
-For example in C++ we exported an integer type function called Init() : extern "C" int __declspec(dllexport) __stdcall Init()
+For example in C++ we exported an integer type function called Init() : 
+                extern "C" int __declspec(dllexport) __stdcall Init()
+
 Now in C# OpenCVInterop :
     - First we import the dll of the C++ code
       [DllImport("Unity_CV_2_v4")]

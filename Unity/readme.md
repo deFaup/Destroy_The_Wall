@@ -20,10 +20,10 @@ For example in C++ we exported an integer type function called Init() :
                 extern "C" int __declspec(dllexport) __stdcall Init()
 
 Now in C# OpenCVInterop :
-    - First we import the dll of the C++ code
+    - Firstly, we import the dll of the C++ code
       [DllImport("Unity_CV_2_v4")]
       
-    - Second we create a method with the same type and same name :
+    - Secondly, we create a method with the same type and same name :
       public static extern int Init();
       
  Now that we have access to our C++ functions thanks to the methods in OpenCVInterop we need a second script to call these methods.

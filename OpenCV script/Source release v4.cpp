@@ -23,7 +23,7 @@ int _y;
 Mat cadre_h_g_init, cadre_h_init, cadre_h_d_init;
 Mat flip_h_g_init, flip_h_init, flip_h_d_init;
 
-int seuil = 40;
+int threshold = 40;
 cv::Rect _h_g;
 cv::Rect _h;
 cv::Rect _h_d;
@@ -87,7 +87,7 @@ extern "C" void __declspec(dllexport) __stdcall Close()
 	destroyWindow(_window);
 }
 
-int draw(Mat cadre, Mat cadre_init, Mat flipped, Point p, int i, int seuil) {
+int draw(Mat cadre, Mat cadre_init, Mat flipped, Point p, int i, int threshold) {
 	/**
 	1. Reckon the mse; 2. Test the distance between init and actual frame
 	3. Draw rectangles 4. save the text " MSE = xx " in var str;
@@ -95,13 +95,13 @@ int draw(Mat cadre, Mat cadre_init, Mat flipped, Point p, int i, int seuil) {
 	char str[20];
 	int value_of_mse = mse(cadre, cadre_init);
 
-	if (value_of_mse > seuil && i == 1) {
+	if (value_of_mse > threshold && i == 1) {
 		rectangle(flipped, _h_g, cv::Scalar(0, 0, 255)); //red
 	}
-	else if (value_of_mse > seuil && i == 2) {
+	else if (value_of_mse > threshold && i == 2) {
 		rectangle(flipped, _h, cv::Scalar(0, 0, 255));
 	}
-	else if (value_of_mse > seuil && i == 3) {
+	else if (value_of_mse > threshold && i == 3) {
 		rectangle(flipped, _h_d, cv::Scalar(0, 0, 255));
 	}
 	else {
@@ -119,7 +119,7 @@ int draw(Mat cadre, Mat cadre_init, Mat flipped, Point p, int i, int seuil) {
 	return value_of_mse;
 }
 
-extern "C" void __declspec(dllexport) __stdcall main(int& mse_h_g, int& mse_h, int& mse_h_d, int& seuil, bool& down) {
+extern "C" void __declspec(dllexport) __stdcall main(int& mse_h_g, int& mse_h, int& mse_h_d, int& threshold, bool& down) {
 
 	Mat image;
 	Mat gray_image;
@@ -145,9 +145,9 @@ extern "C" void __declspec(dllexport) __stdcall main(int& mse_h_g, int& mse_h, i
 
 		// Draw rectangles on colored pic, get the mse of this rectangles (compared with inital ones) and show the result in the flipped image
 
-		mse_h_g = draw(equ_hg, cadre_h_g_init, flipped, Point(0, int(_y / 3) - 10), 1, seuil);
-		mse_h = draw(equ_h, cadre_h_init, flipped, Point(int(_x / 3), int(_y / 3) - 10), 2, seuil);
-		mse_h_d = draw(equ_hd, cadre_h_d_init, flipped, Point(int(2 * _x / 3), int(_y / 3) - 10), 3, seuil);
+		mse_h_g = draw(equ_hg, cadre_h_g_init, flipped, Point(0, int(_y / 3) - 10), 1, threshold);
+		mse_h = draw(equ_h, cadre_h_init, flipped, Point(int(_x / 3), int(_y / 3) - 10), 2, threshold);
+		mse_h_d = draw(equ_hd, cadre_h_d_init, flipped, Point(int(2 * _x / 3), int(_y / 3) - 10), 3, threshold);
 
 		// Picutres shown are resized to 853x480 853 = (480/720)*1280
 		

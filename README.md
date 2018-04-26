@@ -6,7 +6,7 @@ It requires a webcam. If you have more than one webcam activated I suggest that 
 
 The program will open a window in which the images taken by your webcam will appear. 
 The upper part of those images is divided in three squares. 
-To throw balls you will need to move your hands in front of these squares. If the borders of the square remains green it meands your hand hans't been detected, if it turns red your hand has been detected.
+To throw balls you will need to move your hands in front of these squares. If the borders of the square remain green it means that your hand hasn't been detected, if it becomes red your hand has been detected.
 
 The left sided square allows you to move the beam of balls to the left and throw balls. The right square do the same but for the right =)
 Finally the square in the middle throw balls straight at the last position of your beam.
